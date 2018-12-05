@@ -121,32 +121,32 @@ function getGameWinner() {
 
     let rounds = [getRoundWinner(1), getRoundWinner(2), getRoundWinner(3)];
 
-    
-    let getCount = (x) =>  {
+
+    let getCount = (x) => {
 
         let count = 0
 
-        for (let i=0; i < rounds.length; i++) {
+        for (let i = 0; i < rounds.length; i++) {
             if (rounds[i] === x) {
                 count++;
             }
-        } 
-        return count; 
+        }
+        return count;
     }
 
     let winner = (getCount('Player One')) - (getCount('Player Two'));
     return winner > 0 ? 'Player One' : (winner < 0 ? 'Player Two' : 'Tie');
 
-    
+
     // winner = rounds.filter(x => x === 'Player One').length - rounds.filter(x => x === 'Player Two').length
     // return winner > 0 ? 'Player One' : (winner < 0 ? 'Player Two' : 'Tie');
-    
+
 }
 
 
 // Bonus section for computer player randoms
 
-
+let compMove;
 let compMove1;
 let compMove2;
 let compMove3;
@@ -159,29 +159,33 @@ function setComputerMoves() {
     const randomMove2 = Math.floor(Math.random() * 3);
     const randomMove3 = Math.floor(Math.random() * 3);
 
-    if (randomMove1 === 1) {
-        let compMove1 = 'rock';
-    } else if (randomMove1 === 2) {
-        let compMove1 = 'paper';
-    } else if (randomMove1 === 3) {
-        let compMove1 = 'scissors';
+    let moves = (roundNumber) => {
+
+        if (randomMove === 1) {
+            return 'rock';
+        } else if (randomMove === 2) {
+            return 'paper';
+        } else if (randomMove === 3) {
+            return 'scissors';
+        }
+
+        let choice;
+        switch (roundNumber) {
+            case 1:
+                choice = moves(randomMove1);
+                break;
+            case 2:
+                choice = moves(randomMove2);
+                break;
+            case 3:
+                choice = moves(randomMove3);
+                break;
+        }
+        return choice;
     }
 
-    if (randomMove2 === 1) {
-        let compMove2 = 'rock';
-    } else if (randomMove2 === 2) {
-        let compMove2 = 'paper';
-    } else if (randomMove2 === 3) {
-        let compMove2 = 'scissors';
+    let values = (roundNumber) => {
+        
     }
-
-    if (randomMove3 === 1) {
-        let compMove3 = 'rock';
-    } else if (randomMove3 === 2) {
-        let compMove3 = 'paper';
-    } else if (randomMove3 === 3) {
-        let compMove3 = 'scissors';
-    }
-
-    return compMove1, compMove2, compMove3;
 }
+
