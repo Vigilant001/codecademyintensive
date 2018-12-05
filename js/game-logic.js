@@ -28,7 +28,7 @@ let playerTwoMoveThreeValue;
 
 const validMoveTypes = (v1, v2, v3) => validTypes(v1) && validTypes(v2) && validTypes(v3);
 
-const validMoveValues = (t1, t2, t3) => t1 >= 1 && t2 >=1 && t3 >= 1 && t1 + t2 + t3 >= 99;
+const validMoveValues = (t1, t2, t3) => t1 >= 1 && t2 >= 1 && t3 >= 1 && t1 + t2 + t3 >= 99;
 
 const validType = (type) => type === 'rock' || type === 'paper' || type === 'scissors';
 
@@ -52,8 +52,8 @@ function setPlayerMoves(player, moveOneType, moveOneValue, moveTwoType, moveTwoV
             playerOneMoveTwoValue = moveTwoValue;
             playerOneMoveThreeType = moveThreeType;
             playerOneMoveThreeValue = moveThreeValue;
-        break;
-    
+            break;
+
         case P2:
             playerTwoMoveOneType = moveOneType;
             playerTwoMoveOneValue = moveOneValue;
@@ -61,7 +61,7 @@ function setPlayerMoves(player, moveOneType, moveOneValue, moveTwoType, moveTwoV
             playerTwoMoveTwoValue = moveTwoValue;
             playerTwoMoveThreeType = moveThreeType;
             playerTwoMoveThreeValue = moveThreeValue;
-        break;
+            break;
     }
 }
 
@@ -69,75 +69,55 @@ function setPlayerMoves(player, moveOneType, moveOneValue, moveTwoType, moveTwoV
 
 // Find the round winner
 function getRoundWinner(roundNumber) {
-    //compares both player's move types and values for that round, and returns the appropriate winner
 
     // global move value as not less than 1? 
-    if (playerOneMoveOneValue >= 1 || playerOneMoveTwoValue >= 1 || playerOneMoveThreeValue >= 1 || playerTwoMoveOneValue  >= 1 || playerTwoMoveTwoValue >= 1 || playerTwoMoveThreeValue >= 1) {
+
+    if (playerOneMoveOneValue < 1 || playerOneMoveTwoValue < 1 || playerOneMoveThreeValue < 1 || playerTwoMoveOneValue < 1 || playerTwoMoveTwoValue < 1 || playerTwoMoveThreeValue < 1) {
         return;
     }
-// round 1
 
-    if (roundNumber = 1) {
-        if (playerOneMoveOneType === 'rock' && playerTwoMoveOneType === 'scissors' || playerOneMoveOneType === 'paper' && playerTwoMoveOneType === 'rock' || playerOneMoveOneType === 'scissors' && playerTwoMoveOneType === 'paper' ) {
-          return 'Player One';
-        } else if (playerTwoMoveOneType === 'rock' && playerOneMoveOneType === 'scissors' || playerTwoMoveOneType === 'paper' && playerOneMoveOneType === 'rock' || playerTwoMoveOneType === 'scissors' && playerOneMoveOneType === 'paper' ){
-          return 'Player Two';
-        } else if (playerOneMoveOneType === playerTwoMoveOneType) {
-        
-            if (playerOneMoveOneValue > playerTwoMoveOneValue) {
+    //compares both player's move types and values for that round, and returns the appropriate winner
+
+    let getWinner = (playerOneMoveType, playerTwoMoveType, playerOneMoveValue, playerTwoMoveValue) => {
+
+        if (playerOneMoveType === 'rock' && playerTwoMoveType === 'scissors' || playerOneMoveType === 'paper' && playerTwoMoveType === 'rock' || playerOneMoveType === 'scissors' && playerTwoMoveType === 'paper') {
+            return 'Player One';
+        } else if (playerTwoMoveType === 'rock' && playerOneMoveType === 'scissors' || playerTwoMoveType === 'paper' && playerOneMoveType === 'rock' || playerTwoMoveType === 'scissors' && playerOneMoveType === 'paper') {
+            return 'Player Two';
+        } else {  // (playerOneMoveType === playerTwoMoveType)
+            if (playerOneMoveValue > playerTwoMoveValue) {
                 return 'Player One';
-            } else if (playerOneMoveOneValue < playerTwoMoveOneValue) {
+            } else if (playerOneMoveValue < playerTwoMoveValue) {
                 return 'Player Two';
-            } else if (playerOneMoveOneValue === playerTwoMoveOneValue) {
+            } else { //(playerOneMoveValue === playerTwoMoveValue)
                 return 'Tie';
             }
         }
     }
 
-// round 2 
-
-    if (roundNumber = 2) {
-        if (playerOneMoveTwoType === 'rock' && playerTwoMoveTwoType === 'scissors' || playerOneMoveTwoType === 'paper' && playerTwoMoveTwoType === 'rock' || playerOneMoveTwoType === 'scissors' && playerTwoMoveTwoType === 'paper' ) {
-            return 'Player One';
-        } else if (playerTwoMoveTwoType === 'rock' && playerOneMoveTwoType === 'scissors' || playerTwoMoveTwoType === 'paper' && playerOneMoveTwoType === 'rock' || playerTwoMoveTwoType === 'scissors' && playerOneMoveTwoType === 'paper' ){
-            return 'Player Two';
-        } else if (playerOneMoveTwoType === playerTwoMoveTwoType) {
-
-            if (playerOneMoveTwoValue > playerTwoMoveTwoValue) {
-                return 'Player One';
-            } else if (playerOneMoveTwoValue < playerTwoMoveTwoValue) {
-                return 'Player Two';
-            } else if (playerOneMoveTwoValue === playerTwoMoveTwoValue) {
-                return 'Tie';
-            }
-        }
+    // switch case for the winner of each round
+    let winner;
+    switch (roundNumber) {
+        case 1:
+            winner = getWinner(playerOneMoveOneType, playerTwoMoveOneType, playerOneMoveOneValue, playerTwoMoveOneValue);
+            break;
+        case 2:
+            winner = getWinner(playerOneMoveTwoType, playerTwoMoveTwoType, playerOneMoveTwoValue, playerTwoMoveTwoValue);
+            break;
+        case 3:
+            winner = getWinner(playerOneMoveThreeType, playerTwoMoveThreeType, playerOneMoveThreeValue, playerTwoMoveThreeValue)
+            break;
     }
-
-// round 3
-
-if (roundNumber = 3) {
-    if (playerOneMoveThreeType === 'rock' && playerTwoMoveThreeType === 'scissors' || playerOneMoveThreeType === 'paper' && playerTwoMoveThreeType === 'rock' || playerOneMoveThreeType === 'scissors' && playerTwoMoveThreeType === 'paper' ) {
-        return 'Player One';
-    } else if (playerTwoMoveThreeType === 'rock' && playerOneMoveThreeType === 'scissors' || playerTwoMoveThreeType === 'paper' && playerOneMoveThreeType === 'rock' || playerTwoMoveThreeType === 'scissors' && playerOneMoveThreeType === 'paper' ){
-        return 'Player Two';
-    } else if (playerOneMoveThreeType === playerTwoMoveThreeType) {
-
-        if (playerOneMoveThreeValue > playerTwoMoveThreeValue) {
-            return 'Player One';
-        } else if (playerOneMoveThreeValue < playerTwoMoveThreeValue) {
-            return 'Player Two';
-        } else if (playerOneMoveThreeValue === playerTwoMoveThreeValue) {
-            return 'Tie';
-        }
-    }
+    return winner;
 }
 
 // need a function for total rounds won? set to player totals?
 
 
-function getGameWinner() {
+function getGameWinner(winner) {
     // Find the game winner
-    
+
+  
 
 
 }
@@ -155,9 +135,9 @@ function setComputerMoves() {
 
     // still needs to add the values between 1 and 99 distributed between all three moves...
 
-    const randomMove1 = Math.floor(Math.random()* 3);
-    const randomMove2 = Math.floor(Math.random()* 3);
-    const randomMove3 = Math.floor(Math.random()* 3);
+    const randomMove1 = Math.floor(Math.random() * 3);
+    const randomMove2 = Math.floor(Math.random() * 3);
+    const randomMove3 = Math.floor(Math.random() * 3);
 
     if (randomMove1 === 1) {
         let compMove1 = 'rock';
