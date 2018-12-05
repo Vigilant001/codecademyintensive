@@ -24,13 +24,15 @@ let playerTwoMoveTwoValue;
 let playerTwoMoveThreeType;
 let playerTwoMoveThreeValue;
 
-// How do we subtract from the 99 strengths and assign them to one of the values from the start?
 
+// how are we sure the move types are valid?
 const validMoveTypes = (v1, v2, v3) => validTypes(v1) && validTypes(v2) && validTypes(v3);
 
+// How do we subtract from the 99 strengths and assign them to one of the values from the start?
 const validMoveValues = (t1, t2, t3) => t1 >= 1 && t2 >= 1 && t3 >= 1 && t1 + t2 + t3 >= 99;
 
 const validType = (type) => type === 'rock' || type === 'paper' || type === 'scissors';
+
 
 
 // Set the Player Moves variables (using inputs from page?)
@@ -114,7 +116,7 @@ function getRoundWinner(roundNumber) {
 // need a function for total rounds won? set to player totals?
 
 
-function getGameWinner(winner) {
+function getGameWinner() {
     // Find the game winner
 
   
