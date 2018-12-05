@@ -107,7 +107,7 @@ function getRoundWinner(roundNumber) {
             winner = getWinner(playerOneMoveTwoType, playerTwoMoveTwoType, playerOneMoveTwoValue, playerTwoMoveTwoValue);
             break;
         case 3:
-            winner = getWinner(playerOneMoveThreeType, playerTwoMoveThreeType, playerOneMoveThreeValue, playerTwoMoveThreeValue)
+            winner = getWinner(playerOneMoveThreeType, playerTwoMoveThreeType, playerOneMoveThreeValue, playerTwoMoveThreeValue);
             break;
     }
     return winner;
@@ -119,11 +119,12 @@ function getRoundWinner(roundNumber) {
 function getGameWinner() {
     // Find the game winner
 
-  
+    let rounds = [getRoundWinner(1), getRoundWinner(2), getRoundWinner(3)];
 
+    winner = rounds.filter(x => x === 'Player One').length - rounds.filter(x => x === 'Player Two').length
+    return winner > 0 ? 'Player One' : (winner < 0 ? 'Player Two' : 'Tie');
 
 }
-
 
 
 // Bonus section for computer player randoms
