@@ -121,9 +121,26 @@ function getGameWinner() {
 
     let rounds = [getRoundWinner(1), getRoundWinner(2), getRoundWinner(3)];
 
-    winner = rounds.filter(x => x === 'Player One').length - rounds.filter(x => x === 'Player Two').length
+    
+    let getCount = (x) =>  {
+
+        let count = 0
+
+        for (let i=0; i < rounds.length; i++) {
+            if (rounds[i] === x) {
+                count++;
+            }
+        } 
+        return count; 
+    }
+
+    let winner = (getCount('Player One')) - (getCount('Player Two'));
     return winner > 0 ? 'Player One' : (winner < 0 ? 'Player Two' : 'Tie');
 
+    
+    // winner = rounds.filter(x => x === 'Player One').length - rounds.filter(x => x === 'Player Two').length
+    // return winner > 0 ? 'Player One' : (winner < 0 ? 'Player Two' : 'Tie');
+    
 }
 
 
