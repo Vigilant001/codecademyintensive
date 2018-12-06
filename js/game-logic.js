@@ -74,7 +74,7 @@ function getRoundWinner(roundNumber) {
 
     // global move value as not less than 1? 
 
-    if (roundNumber < 1 || roundNumber > 3 ) {
+    if (roundNumber < 1 || roundNumber > 3) {
         return null;
     }
     const playerOneMoveType = [playerOneMoveOneType, playerOneMoveTwoType, playerOneMoveThreeType][roundNumber - 1];
@@ -85,27 +85,27 @@ function getRoundWinner(roundNumber) {
 
     // the test case for this should not have '99' as the value as no one value can be beyond 1-97... but I put <= 99 on it anyways :)
 
-    if (!validType(playerOneMoveType) || !validType(playerTwoMoveType) || !(playerOneMoveValue > 0 && playerOneMoveValue <=99) || !(playerTwoMoveValue > 0 && playerTwoMoveValue <=99) ) {
+    if (!validType(playerOneMoveType) || !validType(playerTwoMoveType) || !(playerOneMoveValue > 0 && playerOneMoveValue <= 99) || !(playerTwoMoveValue > 0 && playerTwoMoveValue <= 99)) {
         return null;
     }
 
-        //compares both player's move types and values for that round, and returns the appropriate winner
+    //compares both player's move types and values for that round, and returns the appropriate winner
 
 
 
-        if (playerOneMoveType === rock && playerTwoMoveType === scissors || playerOneMoveType === paper && playerTwoMoveType === rock || playerOneMoveType === scissors && playerTwoMoveType === paper) {
+    if (playerOneMoveType === rock && playerTwoMoveType === scissors || playerOneMoveType === paper && playerTwoMoveType === rock || playerOneMoveType === scissors && playerTwoMoveType === paper) {
+        return P1;
+    } else if (playerTwoMoveType === rock && playerOneMoveType === scissors || playerTwoMoveType === paper && playerOneMoveType === rock || playerTwoMoveType === scissors && playerOneMoveType === paper) {
+        return P2;
+    } else {  // (playerOneMoveType === playerTwoMoveType)
+        if (playerOneMoveValue > playerTwoMoveValue) {
             return P1;
-        } else if (playerTwoMoveType === rock && playerOneMoveType === scissors || playerTwoMoveType === paper && playerOneMoveType === rock || playerTwoMoveType === scissors && playerOneMoveType === paper) {
+        } else if (playerOneMoveValue < playerTwoMoveValue) {
             return P2;
-        } else {  // (playerOneMoveType === playerTwoMoveType)
-            if (playerOneMoveValue > playerTwoMoveValue) {
-                return P1;
-            } else if (playerOneMoveValue < playerTwoMoveValue) {
-                return P2;
-            } else { //(playerOneMoveValue === playerTwoMoveValue)
-                return tie;
-            }
+        } else { //(playerOneMoveValue === playerTwoMoveValue)
+            return tie;
         }
+    }
 }
 
 // need a function for total rounds won? set to player totals?
@@ -116,6 +116,22 @@ function getGameWinner() {
 
     let rounds = [getRoundWinner(1), getRoundWinner(2), getRoundWinner(3)];
 
+    if (rounds.findIndex(valueAtArrayIndex => valueAtArrayIndex === null) > -1) {
+        return null;
+    }
+
+    // function findIndex(callback) {
+    //     for (let i = 0; i < rounds.length; i++) {
+    //         let value = rounds[i];
+    //         if (callback(value)) {
+    //             return i;
+    //         }
+    //     }
+    //     return -1;
+
+    // if(rounds[0] === null || rounds[1] === null || rounds[2] === null){
+    //     return null;
+    // }
 
     let getCount = (x) => {
 
