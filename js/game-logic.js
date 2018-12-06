@@ -74,7 +74,7 @@ function getRoundWinner(roundNumber) {
 
     // global move value as not less than 1? 
 
-    if (roundNumber < 1 || roundNumber > 3) {
+    if (roundNumber < 1 || roundNumber > 3 ) {
         return null;
     }
     const playerOneMoveType = [playerOneMoveOneType, playerOneMoveTwoType, playerOneMoveThreeType][roundNumber - 1];
@@ -83,7 +83,9 @@ function getRoundWinner(roundNumber) {
     const playerOneMoveValue = [playerOneMoveOneValue, playerOneMoveTwoValue, playerOneMoveThreeValue][roundNumber - 1];
     const playerTwoMoveValue = [playerTwoMoveOneValue, playerTwoMoveTwoValue, playerTwoMoveThreeValue][roundNumber - 1];
 
-    if (!validType(playerOneMoveType) || !validType(playerTwoMoveType)) {
+    // the test case for this should not have '99' as the value as no one value can be beyond 1-97... but I put <= 99 on it anyways :)
+
+    if (!validType(playerOneMoveType) || !validType(playerTwoMoveType) || !(playerOneMoveValue > 0 && playerOneMoveValue <=99) || !(playerTwoMoveValue > 0 && playerTwoMoveValue <=99) ) {
         return null;
     }
 
