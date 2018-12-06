@@ -168,9 +168,9 @@ function setComputerMoves() {
     playerTwoMoveThreeType = movesArr[Math.floor(Math.random() * 3)];
 
 
-    playerTwoMoveOneValue = 1 + Math.floor(Math.random() * 97);;
-    playerTwoMoveTwoValue = 1 + Math.floor(Math.random() * (98 - randomVal1));
-    playerTwoMoveThreeValue = 99 - (randomVal1 + randomVal2);
+    playerTwoMoveOneValue = 1 + Math.floor(Math.random() * 97);
+    playerTwoMoveTwoValue = 1 + Math.floor(Math.random() * (98 - playerTwoMoveOneValue));
+    playerTwoMoveThreeValue = 99 - playerTwoMoveOneValue - playerTwoMoveTwoValue;
 
 }
 
